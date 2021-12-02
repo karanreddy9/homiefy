@@ -32,6 +32,36 @@ const Navbar = () => {
                   Contact
                 </Link>
               </li>
+
+              <li className="nav-item">
+                <Link
+                  className="nav-link active"
+                  aria-current="page"
+                  to="/posts"
+                >
+                  Posts
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link
+                  className="nav-link active"
+                  aria-current="page"
+                  to="/Market"
+                >
+                  Market
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link
+                  className="nav-link active"
+                  aria-current="page"
+                  to="/Search"
+                >
+                  Search
+                </Link>
+              </li>
+
+
               <li className="nav-item">
                 <button
                   type="button"
@@ -54,6 +84,7 @@ const Navbar = () => {
                 </button>
                 <SignUpModal />
               </li>
+
             </ul>
           </div>
         </div>

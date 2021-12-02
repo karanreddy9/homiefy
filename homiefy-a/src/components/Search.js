@@ -5,9 +5,12 @@ import { supabase } from "../supabaseClient";
 
 const Home = () => {
     const [posts, setPosts] = useState([])
+    const [post, setPost] = useState({ name: ""})
+    const { name } = post
 
-    const [post, setPost] = useState({ name: "", address: "", description: "" })
-    const { name, address, description } = post
+    const [removed, setremoves] = useState([])
+    const [remove, setremove] = useState({ removeQuery: ""})
+    const { removeQuery } = remove
 
     useEffect(() => {
         fetchPosts()
@@ -17,43 +20,40 @@ const Home = () => {
             .from('posts')
             .select()
         setPosts(data)
-        console.log("data: ", data)
     }
-    //insert post by the user
-    async function createPost() {
-        await supabase
+    async function searchPosts() {
+        const { data } = await supabase
             .from('posts')
-            .insert([
-
-                { name, address, description }
-            ])
-            .single()
-        //setpost reset the form field
-        setPost({ name: "", address: "", description: "" })
-
+            .select()
+            .eq('name', name)
+        setPosts(data)
+        setPost({ name: ""})
+    }
+    async function deletePosts() {
+        const { data } = await supabase
+        .from('posts')
+        .delete()
+        .eq('name', removeQuery)
         fetchPosts()
     }
+
     return (
         <div className="row justify-content-center">
             <div className="col-11">
                 <input
-                    placeholder="name"
+                    placeholder="search by name"
                     value={name}
                     onChange={e => setPost({ ...post, name: e.target.value })}
                 />
+                <button onClick={searchPosts}>submit</button>
+                <button onClick={fetchPosts}>reset</button>
+                <div> <br /> </div>
                 <input
-                    placeholder="address"
-                    value={address}
-                    onChange={e => setPost({ ...post, address: e.target.value })}
+                    placeholder="delete by name"
+                    value={removeQuery}
+                    onChange={e => setremove({ ...remove, removeQuery: e.target.value })}
                 />
-
-                <input
-                    placeholder="description"
-                    value={description}
-                    onChange={e => setPost({ ...post, description: e.target.value })}
-                />
-                <button onClick={createPost}>submit</button>
-
+                <button onClick={deletePosts}>delete</button>
                 {
                     //.slice at index zero and reverse to show most recent first
                     posts.slice(0).reverse().map(post => (
@@ -80,3 +80,7 @@ const Home = () => {
 };
 
 export default Home;
+
+
+
+
