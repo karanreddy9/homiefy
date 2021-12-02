@@ -12,6 +12,37 @@ code {
     monospace;
 }
 
-.half-top {
-  margin-top: 40%;
+
+.posting {
+  height: 20%;
+  background-color: rgb(114, 98, 98);
 }
+
+.scoolLogo{
+  height: 100%;
+  margin-left: 0;
+  padding: 0;
+}
+.logo-img {
+  height: 100%;
+  max-width:100%;
+}
+
+.posting-col{
+  height: 100%;
+}
+
+.marketPosting {
+  margin-top: 2%;
+}
+
+.market-logo-border {
+  border: red 30px;
+}
+
+.no-pad-marg {
+ margin: 0;
+ padding: 0;
+}
+
+

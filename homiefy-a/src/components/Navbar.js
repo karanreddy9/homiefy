@@ -3,6 +3,7 @@ import { Link, useHistory } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 import { supabase } from "../supabaseClient";
 
+
 import SignUpModal from "./SignUpModal";
 import SignInModal from "./SignInModal";
 
@@ -44,45 +45,49 @@ const Navbar = () => {
                 </Link>
               </li>
 
-              {currentUser ? (
-                <li className="nav-item">
-                  <button
-                    type="button"
-                    className="btn btn-danger"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      handleSignOut();
-                    }}
-                  >
-                    Sign Out
-                  </button>
-                </li>
-              ) : (
-                <>
-                  <li className="nav-item">
-                    <button
-                      type="button"
-                      className="btn btn-outline-primary"
-                      data-bs-toggle="modal"
-                      data-bs-target="#signInModal"
-                    >
-                      Sign In
-                    </button>
-                    <SignInModal />
-                  </li>
-                  <li className="nav-item">
-                    <button
-                      type="button"
-                      className="btn btn-primary"
-                      data-bs-toggle="modal"
-                      data-bs-target="#signUpModal"
-                    >
-                      Sign Up
-                    </button>
-                    <SignUpModal />
-                  </li>
-                </>
-              )}
+              <li className="nav-item">
+                <Link
+                  className="nav-link active"
+                  aria-current="page"
+                  to="/posts"
+                >
+                  Posts
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link
+                  className="nav-link active"
+                  aria-current="page"
+                  to="/Market"
+                >
+                  Market
+                </Link>
+              </li>
+
+
+              <li className="nav-item">
+                <button
+                  type="button"
+                  className="btn btn-outline-primary"
+                  data-bs-toggle="modal"
+                  data-bs-target="#signInModal"
+                >
+                  Sign In
+                </button>
+                <SignInModal />
+              </li>
+              <li className="nav-item">
+                <button
+                  type="button"
+                  className="btn btn-primary"
+                  data-bs-toggle="modal"
+                  data-bs-target="#signUpModal"
+                >
+                  Sign Up
+                </button>
+                <SignUpModal />
+              </li>
+
             </ul>
           </div>
         </div>

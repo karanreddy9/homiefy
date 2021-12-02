@@ -4,8 +4,10 @@ import { supabase } from "../supabaseClient";
 
 const Home = () => {
   const [posts, setPosts] = useState([])
-  const [post, setPost] = useState ({ name: "", address: ''})
-  const { name, address } = post
+
+  const [post, setPost] = useState ({ name: "", address: "", description: ""})
+  const { name, address, description } = post
+
   useEffect(() => {
     fetchPosts()
   }, [])
@@ -21,11 +23,13 @@ const Home = () => {
     await supabase
       .from('posts')
       .insert([
-        { name, address}
+
+        { name, address, description}
       ])
       .single()
       //setpost reset the form field
-    setPost({ name: "", address: ""})
+    setPost({ name: "", address: "", description: ""})
+
     fetchPosts()
   }
   return (
@@ -41,20 +45,32 @@ const Home = () => {
         value={address}
         onChange={e => setPost({ ...post, address: e.target.value })}
       />
+
+      <input 
+        placeholder="description"
+        value={description}
+        onChange={e => setPost({ ...post, description: e.target.value })}
+      />
+
+
       <button onClick={createPost}>submit</button>
       {
         //.slice at index zero and reverse to show most recent first
         posts.slice(0).reverse().map(post => (
           <div className="row posting border" key={post.id}>
             <div className="col-sm scoolLogo">
-            <img src="trash.jpg"  className="img-fluid img-thumbnaiil" alt="image not working"/>
+            <img src="logo.png"  className="logo-img"/>
             </div>
-            <div className="col-sm">
+            <div className="col-sm posting-col">
               <h4 className="half-top">{post.name}</h4>
             </div>
-            <div className="col-sm">
+            <div className="col-sm posting-col">
               <p className="half-top">{post.address}</p>
             </div>
+            <div className="col-sm posting-col">
+              <p className="half-top">{post.description}</p>
+            </div>
+
           </div>
         ))
       }

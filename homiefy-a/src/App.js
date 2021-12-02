@@ -3,22 +3,26 @@ import "./App.css";
 import { BrowserRouter as Router, Switch } from "react-router-dom";
 
 import Navbar from "./components/Navbar";
+
+import Home from "./components/Home";
 import Posts from "./components/Posts";
-import AuthProvider from "./contexts/AuthContext";
-import PrivateRoute from "./components/PrivateRoute";
+import Market from "./components/Market"
+import Contact from "./components/Contact";
+import About from "./components/About";
 
 function App() {
   return (
     <Router>
       <div className="App">
-        <AuthProvider>
-          <Navbar />
-          <div className="container">
-            <Switch>
-              <PrivateRoute exact path="/posts" component={Posts} />
-            </Switch>
-          </div>
-        </AuthProvider>
+
+        <Navbar />
+        <div className="container">
+          <Route exact path="/home" component={Home} />
+          <Route exact path="/contact" component={Contact} />
+          <Route exact path="/posts" component={Posts} />
+          <Route exact path="/market" component={Market} />
+          <Route exact path="/about" component={About} />
+        </div>
       </div>
     </Router>
   );
