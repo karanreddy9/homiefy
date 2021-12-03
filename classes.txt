@@ -8,5 +8,5 @@ Sign In
 Sign Up
 Profile
 Posts
-
-More components will be added in the future.
+Rent
+Shop
